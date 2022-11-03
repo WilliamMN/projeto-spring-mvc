@@ -1,0 +1,81 @@
+/*main*/
+.main-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	border-bottom: solid black 2px
+}
+
+.main-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.main-column {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	height: 100px;
+	width: 50%;
+}
+
+.main-title {
+	font-size: 20px;
+	color: black;
+}
+
+.main-logo {
+	width: 50px;
+	margin-right: 20px;
+}
+
+/*hello world form*/
+.hello-form-html {
+	height: 100%;
+}
+
+.hello-form-body {
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+.hello-form-input-text {
+	padding: 0;
+	height: 33px;
+	border: solid black 1px;
+}
+
+.hello-form-input-text:focus {
+	border-color: #729fcf;
+}
+
+.hello-form-input-button {
+	background-color: #3465a4;
+	border: 0;
+	border-radius: 5px;
+	height: 35px;
+	width: 100px;
+	color: #fff;
+	font-weight: bold;
+}
+
+.hello-form-input-button:hover {
+	background-color: #729fcf;
+}
+/*hello world*/
+.hello-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.hello-column {
+	display: flex;
+	flex-direction: column;
+}
+
+/*student*/
