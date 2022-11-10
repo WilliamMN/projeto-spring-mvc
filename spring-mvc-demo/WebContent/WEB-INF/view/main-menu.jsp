@@ -14,6 +14,7 @@
 			<div class="main-column">
 				<a href="hello/showForm">Hello World Form</a>
 				<a href="student/showForm">Student Form</a>
+				<a href="costumer/showForm">Costumer Form</a>
 			</div>
 		</div>
 		
