@@ -7,7 +7,7 @@ import javax.validation.ConstraintValidatorContext;
 
 public class CourseCodeConstraintValidator implements ConstraintValidator<CourseCode, String> {
 
-	private String coursePrefix;
+	private String[] coursePrefix;
 
 	@Override
 	public void initialize(CourseCode theCourseCode) {
@@ -19,7 +19,13 @@ public class CourseCodeConstraintValidator implements ConstraintValidator<Course
 		boolean result = true;
 
 		if (Objects.nonNull(theCode)) {
-			result = theCode.startsWith(coursePrefix);
+			for(String tempPrefix : coursePrefix) {
+				result = theCode.startsWith(tempPrefix);
+				
+				if (result) {
+					break;
+				}
+			}
 		}
 
 		return result;

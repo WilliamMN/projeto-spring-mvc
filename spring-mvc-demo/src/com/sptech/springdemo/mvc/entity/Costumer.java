@@ -25,7 +25,7 @@ public class Costumer {
 	@Pattern(regexp = "^[a-zA-Z0-9]{5}", message = "only 5 chars/digits")
 	private String postalCode;
 
-	@CourseCode
+	@CourseCode(value = { "LUV", "STA" }, message = "must start with LUV or STA")
 	private String courseCode;
 
 	public String getFirstName() {

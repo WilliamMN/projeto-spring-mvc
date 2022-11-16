@@ -14,7 +14,7 @@ import javax.validation.Payload;
 public @interface CourseCode {
 	
 	// define o padrao de codigo
-	public String value() default "LUV";
+	public String[] value() default {"LUV"};
 	
 	// define o padrao de message
 	public String message() default "must start with LUV";
