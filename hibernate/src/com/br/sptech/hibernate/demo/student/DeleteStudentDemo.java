@@ -1,4 +1,4 @@
-package com.br.sptech.hibernate.demo;
+package com.br.sptech.hibernate.demo.student;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -6,10 +6,9 @@ import org.hibernate.cfg.Configuration;
 
 import com.br.sptech.hibernate.demo.entity.Student;
 
-public class ReadStudentDemo {
+public class DeleteStudentDemo {
 
 	public static void main(String[] args) {
-		
 		SessionFactory factory = new Configuration()
 				.configure("hibernate.cfg.xml")
 				.addAnnotatedClass(Student.class)
@@ -19,28 +18,20 @@ public class ReadStudentDemo {
 		
 		try {
 			
-			Student student = new Student("43w3", "qwe", "asfdasdd");
-			
-			session.beginTransaction();
-			
-			session.save(student);
-			
-			System.out.println(student);
-			
-			session.getTransaction().commit();
-			
 			session = factory.getCurrentSession();
 			
 			session.beginTransaction();
 			
-			Student doBanco = session.get(Student.class, student.getId());
+			Student student = session.get(Student.class, 8);
 			
-			System.out.println(doBanco);
+			session.delete(student);
+			session.createQuery("delete from Student where id=6").executeUpdate();
+			
+			session.getTransaction().commit();
 		
 		} finally {
 			session.close();
 		}
-
 	}
 
 }

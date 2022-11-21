@@ -1,4 +1,4 @@
-package com.br.sptech.hibernate.demo;
+package com.br.sptech.hibernate.demo.student;
 
 import java.util.Iterator;
 import java.util.List;
@@ -11,6 +11,7 @@ import com.br.sptech.hibernate.demo.entity.Student;
 
 public class QueryStudentDemo {
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		SessionFactory factory = new Configuration()
 				.configure("hibernate.cfg.xml")
@@ -24,7 +25,7 @@ public class QueryStudentDemo {
 			session = factory.getCurrentSession();
 			
 			session.beginTransaction();
-			
+
 			List<Student> listDoBanco = session.createQuery("from Student").getResultList();
 			
 			List<Student> listDoBancoComWhere = session.createQuery("from Student s where s.firstName = 'asd'").getResultList();

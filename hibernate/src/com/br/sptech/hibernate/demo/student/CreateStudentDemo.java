@@ -1,4 +1,4 @@
-package com.br.sptech.hibernate.demo;
+package com.br.sptech.hibernate.demo.student;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
