@@ -1,14 +1,14 @@
-package com.br.sptech.hibernate.demo.course;
+package com.br.sptech.hibernate.onetoone.demo;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
-import com.br.sptech.hibernate.demo.entity.Course;
-import com.br.sptech.hibernate.demo.entity.Instructor;
-import com.br.sptech.hibernate.demo.entity.InstructorDetail;
+import com.br.sptech.hibernate.onetoone.demo.entity.Instructor;
+import com.br.sptech.hibernate.onetoone.demo.entity.InstructorDetail;
 
-public class CreateCourseDemo {
+public class QueryInstructorDemo {
 
 	public static void main(String[] args) {
 		
@@ -16,7 +16,6 @@ public class CreateCourseDemo {
 				.configure("hibernate.cfg.xml")
 				.addAnnotatedClass(Instructor.class)
 				.addAnnotatedClass(InstructorDetail.class)
-				.addAnnotatedClass(Course.class)
 				.buildSessionFactory();
 		
 		Session session = factory.getCurrentSession();
@@ -25,15 +24,16 @@ public class CreateCourseDemo {
 			
 			session.beginTransaction();
 			
-			Instructor i = session.get(Instructor.class, 5);
+			Query<Instructor> query = session.createQuery("select i from Instructor i join fetch i.courses where i.id = :theInstructorId", Instructor.class);
 			
-			Course c1 = new Course(null, "bla bla", null);
-			Course c2 = new Course(null, "bla2 bla2", null);
+			query.setParameter("theInstructorId", 5);
 			
-			i.add(c1);
-			i.add(c2);
+			Instructor i = query.getSingleResult();
 			
-			session.save(c1);
+			Instructor in = session.get(Instructor.class, 5);
+			
+			System.out.println(in);
+			System.out.println(i);
 			
 			session.getTransaction().commit();
 			
@@ -41,7 +41,6 @@ public class CreateCourseDemo {
 			e.printStackTrace();
 		} finally {
 			session.close();
-			factory.close();
 		}
 
 	}

@@ -1,4 +1,4 @@
-package com.br.sptech.hibernate.demo.entity;
+package com.br.sptech.hibernate.onetoone.demo.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,8 +29,7 @@ public class InstructorDetail {
 	public InstructorDetail() {
 	}
 
-	public InstructorDetail(Integer id, String youtubeChannel, String hobby) {
-		this.id = id;
+	public InstructorDetail(String youtubeChannel, String hobby) {
 		this.youtubeChannel = youtubeChannel;
 		this.hobby = hobby;
 	}
@@ -65,6 +64,11 @@ public class InstructorDetail {
 
 	public void setInstructor(Instructor instructor) {
 		this.instructor = instructor;
+	}
+
+	@Override
+	public String toString() {
+		return "InstructorDetail [id=" + id + ", youtubeChannel=" + youtubeChannel + ", hobby=" + hobby + "]";
 	}
 	
 	

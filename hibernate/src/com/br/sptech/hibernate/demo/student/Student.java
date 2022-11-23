@@ -1,4 +1,4 @@
-package com.br.sptech.hibernate.demo.entity;
+package com.br.sptech.hibernate.demo.student;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

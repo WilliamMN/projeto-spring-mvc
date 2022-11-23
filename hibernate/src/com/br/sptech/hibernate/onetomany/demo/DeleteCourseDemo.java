@@ -1,20 +1,23 @@
-package com.br.sptech.hibernate.demo.instructor;
+package com.br.sptech.hibernate.onetomany.demo;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import com.br.sptech.hibernate.demo.entity.Instructor;
-import com.br.sptech.hibernate.demo.entity.InstructorDetail;
-import com.br.sptech.hibernate.demo.entity.Student;
+import com.br.sptech.hibernate.onetomany.demo.entity.Course;
+import com.br.sptech.hibernate.onetomany.demo.entity.Instructor;
+import com.br.sptech.hibernate.onetomany.demo.entity.InstructorDetail;
+import com.br.sptech.hibernate.onetomany.demo.entity.Review;
 
-public class DeleteInstructorDemo {
+public class DeleteCourseDemo {
 
 	public static void main(String[] args) {
 		SessionFactory factory = new Configuration()
 				.configure("hibernate.cfg.xml")
 				.addAnnotatedClass(Instructor.class)
 				.addAnnotatedClass(InstructorDetail.class)
+				.addAnnotatedClass(Course.class)
+				.addAnnotatedClass(Review.class)
 				.buildSessionFactory();
 		
 		Session session = factory.getCurrentSession();
@@ -25,20 +28,17 @@ public class DeleteInstructorDemo {
 			
 			session.beginTransaction();
 			
-			Instructor i = session.get(Instructor.class, 2);
+			Course c = session.get(Course.class, 4);
 			
-			InstructorDetail id = session.get(InstructorDetail.class, 4);
-			
-//			session.delete(i);
-//			session.createQuery("delete from Student where id=6").executeUpdate();
-			
-			id.getInstructor().setInstructorDetail(null);
-			session.delete(id);
+			session.delete(c);
 			
 			session.getTransaction().commit();
 		
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 	}
 

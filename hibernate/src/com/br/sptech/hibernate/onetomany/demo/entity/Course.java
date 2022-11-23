@@ -1,13 +1,18 @@
-package com.br.sptech.hibernate.demo.entity;
+package com.br.sptech.hibernate.onetomany.demo.entity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,14 +30,23 @@ public class Course {
 	@JoinColumn(name = "instructor_id")
 	private Instructor instructor;
 	
+	@OneToMany(cascade= CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "course_id")
+	private List<Review> reviews;
+	
 	public Course() {
 	}
 
-	public Course(Integer id, String title, Instructor instructor) {
-		super();
-		this.id = id;
+	public Course(String title) {
 		this.title = title;
-		this.instructor = instructor;
+	}
+	
+	public void add(Review review) {
+		if (reviews == null) {
+			reviews = new ArrayList<>();
+		}
+		
+		reviews.add(review);
 	}
 
 	public Integer getId() {
@@ -58,5 +72,20 @@ public class Course {
 	public void setInstructor(Instructor instructor) {
 		this.instructor = instructor;
 	}
+	
+	
 
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
+
+	@Override
+	public String toString() {
+		return "Course [id=" + id + ", title=" + title + "]";
+	}
+	
 }

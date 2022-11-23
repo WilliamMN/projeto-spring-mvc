@@ -1,4 +1,4 @@
-package com.br.sptech.hibernate.demo.entity;
+package com.br.sptech.hibernate.onetomany.demo.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,25 +32,24 @@ public class Instructor {
 	@Column(name = "email")
 	private String email;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="instructor_detail_id")
 	private InstructorDetail instructorDetail;
 	
-	@OneToMany(mappedBy = "instructor", cascade= {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@OneToMany(mappedBy = "instructor", cascade= {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH}, fetch = FetchType.LAZY)
 	private List<Course> courses;
 	
 	public Instructor() {
 	}
 
-	public Instructor(Integer id, String firstName, String lastName, String email, InstructorDetail instructorDetail) {
-		this.id = id;
+	public Instructor(String firstName, String lastName, String email, InstructorDetail instructorDetail) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.instructorDetail = instructorDetail;
 	}
 	
-	public void add(Course course) {
+	public void addCourse(Course course) {
 		if (courses == null) {
 			courses = new ArrayList<>();
 		}
@@ -106,6 +106,15 @@ public class Instructor {
 	public void setCourses(List<Course> courses) {
 		this.courses = courses;
 	}
+
+	@Override
+	public String toString() {
+		return "Instructor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", instructorDetail=" + instructorDetail + ", courses=" + courses + "]";
+	}
+
+
+	
 	
 	
 }
