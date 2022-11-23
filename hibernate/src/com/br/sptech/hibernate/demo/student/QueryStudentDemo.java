@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import com.br.sptech.hibernate.demo.student.entity.Student;
+
 public class QueryStudentDemo {
 
 	@SuppressWarnings("unchecked")
